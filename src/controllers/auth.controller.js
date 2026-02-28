@@ -1,11 +1,12 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/User.js";
+import User  from "../models/User.js";
 import { ApiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || "7d" });
 
+// reigister
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password, adminSecret } = req.body;
 
@@ -37,6 +38,7 @@ export const register = asyncHandler(async (req, res) => {
   });
 });
 
+//  login
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
